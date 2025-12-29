@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dryknuknadsl7"]
+
+[ext_resource type="PackedScene" uid="uid://ca5ysa77v7rxt" path="res://scenes/player.tscn" id="1_ig7tw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ig7tw"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TempArena" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="BlackBackground" type="ColorRect" parent="TempArena"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Floor" type="StaticBody2D" parent="TempArena"]
+position = Vector2(576, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempArena/Floor"]
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Line2D" type="Line2D" parent="TempArena/Floor"]
+points = PackedVector2Array(-576, 0, 576, 0)
+width = 2.0
+
+[node name="Ceiling" type="StaticBody2D" parent="TempArena"]
+position = Vector2(576, 48)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempArena/Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_ig7tw")
+
+[node name="Line2D" type="Line2D" parent="TempArena/Ceiling"]
+points = PackedVector2Array(-576, 0, 576, 0)
+width = 2.0
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(576, 324)
