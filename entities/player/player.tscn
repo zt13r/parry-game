@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca5ysa77v7rxt"]
+[gd_scene load_steps=10 format=3 uid="uid://ca5ysa77v7rxt"]
 
 [ext_resource type="Script" uid="uid://dybs74ygojbd5" path="res://entities/player/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://bbt4ssn8r0q1s" path="res://components/hboxes/hurtbox.tscn" id="2_abrql"]
+[ext_resource type="Resource" uid="uid://brcf5h6svpp6y" path="res://resources/weapons/gun_test.tres" id="2_sglur"]
+
+[sub_resource type="Gradient" id="Gradient_sglur"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bls4j"]
+gradient = SubResource("Gradient_sglur")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(32, 32)
@@ -12,8 +20,17 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_3vyb7")
 fill_from = Vector2(0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
+size = Vector2(32, 32)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
+weapon = ExtResource("2_sglur")
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+scale = Vector2(0.125, 0.125)
+texture = SubResource("GradientTexture2D_bls4j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
@@ -21,3 +38,13 @@ shape = SubResource("RectangleShape2D_g2els")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_g2els")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_abrql")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_sglur")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

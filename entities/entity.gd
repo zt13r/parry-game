@@ -4,10 +4,14 @@ class_name Entity extends CharacterBody2D
 @export_group("Stats")
 @export var health: float = 100.0 ## Entity health
 
+# Still unsure whether or not to have enemies carry set or semi-randomized weapons (excluding bosses)
+@export var weapon: Weapon = null ## Equipped weapon
 
 @export_group("Speed Parameters")
 @export var move_speed: float = 400.0 ## Directional (x) movement speed
-@export var attack_speed: float = 0.0 ## Attack speed (player: affected by weapon and class)
+@export var attack_speed: float = 1.0 ## Attack speed in seconds (player: affected by weapon and class)
+
+# Still unsure whether or not to have enemies be able to parry
 @export var parry_speed: float = 0.0 ## Speed at which player can parry attacks
 
 @export_group("Strength Parameters")
