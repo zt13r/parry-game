@@ -6,6 +6,6 @@ const BULLET: PackedScene = preload("res://components/bullet.tscn")
 
 func attack(dir: Vector2) -> void:
 	var bullet: Bullet = BULLET.instantiate()
-	bullet.direction = dir - player.global_position
+	bullet.direction = player.global_position- dir
 	bullet.global_position = player.weapon_sprite.global_position
 	player.get_tree().root.add_child(bullet)
