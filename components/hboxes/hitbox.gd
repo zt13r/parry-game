@@ -5,5 +5,5 @@ class_name Hitbox extends Area2D
 var damage: float = 0.0 ## Inherited from weapon/entity parent
 
 
-func _on_hurtbox_entered(area: Hurtbox) -> void:
-	pass # Replace with function body.
+func _on_hurtbox_entered(hurtbox: Hurtbox) -> void:
+	hurtbox.apply_damage(damage)

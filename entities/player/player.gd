@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody2D
+class_name Player extends Entity
 
 
 enum State {
@@ -10,19 +10,7 @@ enum State {
 }
 
 
-@export_group("Speed Parameters")
-@export var move_speed: float = 400.0 ## Directional (x) movement speed
-@export var attack_speed: float = 0.0 ## Player attack speed, affected by weapon and class
-@export var parry_speed: float = 0.0 ## Speed at which player can parry attacks
-
-@export_group("Strength Parameters")
-@export var attack_damage: float = 0.0 ## Player attack strength, affected by weapon and class
 @export var parry_strength: float = 0.0 ## Damage reflected after a successful parry
-
-@export_group("Jump Parameters")
-@export var jump_height: float = 500.0 ## Directional (y) jump velocity
-@export var descent_speed: float = 2.5 ## Used for "realism"
-@export var max_descent_speed: float = 10.0 ## Player max descent speed, also used for "realism"
 
 
 var current_state: State = State.IDLE ## Used for player processing and transition
