@@ -29,6 +29,9 @@ gradient = SubResource("Gradient_sglur")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
+size = Vector2(32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkugw"]
 atlas = ExtResource("3_bls4j")
 region = Rect2(0, 0, 8, 8)
@@ -95,9 +98,6 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
-size = Vector2(32, 32)
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 weapon = SubResource("Resource_bls4j")
@@ -110,16 +110,16 @@ texture = SubResource("GradientTexture2D_bls4j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
 
+[node name="Hurtbox" parent="." instance=ExtResource("2_abrql")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_sglur")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bectd")
 animation = &"idle_front"
 frame_progress = 0.528932
-
-[node name="Hurtbox" parent="." instance=ExtResource("2_abrql")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("RectangleShape2D_sglur")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

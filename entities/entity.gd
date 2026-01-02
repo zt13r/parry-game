@@ -1,4 +1,6 @@
 class_name Entity extends CharacterBody2D
+# Putting here for no reason at all:
+# To get root node: node.get_tree().root.get_child(0)
 
 
 @export_group("Stats")
@@ -23,9 +25,28 @@ class_name Entity extends CharacterBody2D
 @export var max_descent_speed: float = 10.0 ## Max descent speed, also used for "realism"
 
 
+var direction: float = 0.0 ## Movement variable
+var air_time: float = 0.0 ## Gravity/descent helper
+
+var can_attack: bool = true
+
+
 func _ready() -> void:
 	if not is_in_group("Entities"):
 		add_to_group("Entities")
+
+
+func _physics_process(delta: float) -> void:
+	_handle_movement(delta)
+	_apply_gravity(delta)
+
+
+func _handle_movement(delta) -> void:
+	pass
+
+
+func _apply_gravity(delta: float) -> void:
+	pass
 
 
 func damage(points: float) -> void:

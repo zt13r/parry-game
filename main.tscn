@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dryknuknadsl7"]
+[gd_scene load_steps=8 format=3 uid="uid://dryknuknadsl7"]
 
 [ext_resource type="PackedScene" uid="uid://ca5ysa77v7rxt" path="res://entities/player/player.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bsfswaibudqrc" path="res://resources/weapons/gun_test.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cflw0exn7ewr5" path="res://entities/enemy/enemy.tscn" id="3_h2yge"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ig7tw"]
 
@@ -83,3 +84,9 @@ width = 2.0
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(576, 324)
 weapon = SubResource("Resource_h2yge")
+
+[node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(377, 411)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(781, 469)

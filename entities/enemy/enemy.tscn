@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cflw0exn7ewr5"]
+
+[ext_resource type="Script" uid="uid://ciq014gxd5ywj" path="res://entities/enemy/enemy.gd" id="1_3fvr7"]
+[ext_resource type="Script" uid="uid://tpyw4lhoxasm" path="res://components/hboxes/hurtbox.gd" id="2_3fvr7"]
+[ext_resource type="Texture2D" uid="uid://dy0vb6m8u7ffc" path="res://assets/player/monarch-idle.png" id="2_dt443"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fvr7"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dt443"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wwj3"]
+atlas = ExtResource("2_dt443")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d50e0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wwj3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_3fvr7")
+move_speed = 150.0
+metadata/_custom_type_script = "uid://hv2sabeacfbg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3fvr7")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("2_3fvr7")
+metadata/_custom_type_script = "uid://tpyw4lhoxasm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_dt443")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.370579, 0.181124, 1)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_d50e0")

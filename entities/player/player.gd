@@ -1,6 +1,4 @@
 class_name Player extends Entity
-# Putting here for no reason at all:
-# To get root node: node.get_tree().root.get_child(0)
 
 
 enum State {
@@ -18,13 +16,8 @@ enum State {
 
 var current_state: State = State.IDLE ## Used for player processing and transition
 
-var direction: float = 0.0 ## Movement variable
-var air_time: float = 0.0 ## Gravity/descent helper
-
 var mouse_pos: Vector2 = Vector2.ZERO ## Keeps track of global mouse position
 var weapon_dir: Vector2
-
-var can_attack: bool = true
 
 
 @onready var weapon_sprite: Sprite2D = $WeaponSprite
@@ -33,13 +26,21 @@ var can_attack: bool = true
 
 func _ready() -> void:
 	super()
+
+	if not is_in_group("Player"):
+		add_to_group("Player")
+
 	_initialize_weapon()
 
 
 func _physics_process(delta: float) -> void:
-	_apply_gravity(delta)
+	super(delta)
 	_weapon_stuff()
 
+	move_and_slide()
+
+
+func _handle_movement(delta: float) -> void:
 	# Process states
 	match current_state:
 		State.IDLE: _process_idle()
@@ -61,7 +62,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		current_state = State.IDLE
 
-	move_and_slide()
+
+func _apply_gravity(delta: float) -> void:
+	if is_on_floor():
+		air_time = 0.0
+	else:
+		air_time += delta * descent_speed
+
+	# Heavier gravity if pressing down
+	if Input.is_action_pressed("move_down"):
+		air_time = max_descent_speed
+	air_time = min(air_time, max_descent_speed)
+
+	# Apply gravity
+	velocity.y = lerp(velocity.y, get_gravity().y * air_time, delta)
 
 
 func _initialize_weapon() -> void:
@@ -92,21 +106,6 @@ func _process_attacked() -> void:
 
 func _process_parry() -> void:
 	pass
-
-
-func _apply_gravity(delta: float) -> void:
-	if is_on_floor():
-		air_time = 0.0
-	else:
-		air_time += delta * descent_speed
-
-	# Heavier gravity if pressing down
-	if Input.is_action_pressed("move_down"):
-		air_time = max_descent_speed
-	air_time = min(air_time, max_descent_speed)
-
-	# Apply gravity
-	velocity.y = lerp(velocity.y, get_gravity().y * air_time, delta)
 
 
 func _weapon_stuff() -> void:
