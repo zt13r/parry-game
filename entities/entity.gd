@@ -40,7 +40,7 @@ func _ready() -> void:
 func hit(points: float) -> void:
 	health -= points
 	print("%s: Ouch that hurts", name)
-	if health < 0.0:
+	if health <= 0.0:
 		die()
 
 

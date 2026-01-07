@@ -17,7 +17,7 @@ script = ExtResource("2_sglur")
 name = "Gun Test"
 sprite = SubResource("GradientTexture2D_0lwar")
 damage = 0.0
-attack_speed = 0.8
+attack_speed = 0.0
 metadata/_custom_type_script = "uid://dkrcdpmn67x81"
 
 [sub_resource type="Gradient" id="Gradient_sglur"]

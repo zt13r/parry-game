@@ -13,7 +13,7 @@ class_name Weapon extends Resource
 func apply_stats(entity: Entity) -> void:
 	entity.damage *= damage
 	entity.attack_speed *= attack_speed
-	print(attack_speed) # IT'S 0.0 EVEN THO I SET IS AS 0.8 IN INSPECTOR
+	print(attack_speed)
 
 
 func attack(source: Entity) -> void:

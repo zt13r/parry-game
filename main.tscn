@@ -18,7 +18,7 @@ script = ExtResource("2_0xm2m")
 name = "Guntest"
 sprite = SubResource("GradientTexture2D_h2yge")
 damage = 0.0
-attack_speed = 0.0
+attack_speed = 0.1
 metadata/_custom_type_script = "uid://bsfswaibudqrc"
 
 [node name="Main" type="Node2D"]
@@ -83,6 +83,7 @@ width = 2.0
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(576, 324)
+weapon_pos_distance = 25.0
 weapon = SubResource("Resource_h2yge")
 
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
