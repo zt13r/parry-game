@@ -5,7 +5,7 @@ const BULLET: PackedScene = preload("res://components/bullet.tscn")
 
 
 func attack() -> void:
-	var bullet: Bullet = BULLET.instantiate()
+	var bullet: Projectile = BULLET.instantiate()
 
 	bullet.damage = actor.damage
 	bullet.direction = actor.weapon_dir
@@ -13,4 +13,4 @@ func attack() -> void:
 
 	bullet.global_position = actor.global_position
 
-	get_tree().root.get_child(0).add_child(bullet)
+	add_sibling(bullet)

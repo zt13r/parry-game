@@ -20,7 +20,8 @@ func _ready() -> void:
 
 
 func _on_hitbox_entered(hurtbox: Hurtbox) -> void:
-	#if hurtbox.actor == 
+	# No friendly fire
+	if hurtbox.actor.weapon is RangedWeapon
 
 	hurtbox.apply_damage(damage)
 	actor.queue_free() # Delete from scene for projectiles and stuff, idk

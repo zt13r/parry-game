@@ -1,4 +1,4 @@
-class_name Bullet extends CharacterBody2D
+class_name Projectile extends CharacterBody2D
 # No direct collision child, hits are handled by Hitbox component
 
 
