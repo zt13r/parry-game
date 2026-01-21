@@ -3,6 +3,8 @@ class_name Entity extends CharacterBody2D
 # To get root node: node.get_tree().root.get_child(0)
 
 
+@export var immunity_frames: float = 0.9 ## Pauses hurtbox for immunity_frames time when hit
+
 @export_group("Stats")
 @export var health: float = 100.0 ## Entity health
 
@@ -28,6 +30,7 @@ class_name Entity extends CharacterBody2D
 var direction: float = 0.0 ## Movement variable
 var air_time: float = 0.0 ## Gravity/descent helper
 var time_since_attack: float = 0.0 ## Attack speed thing
+var time_since_last_hit: float = 0.0 ## Immunity frames stuff
 
 var can_attack: bool = true
 
@@ -36,14 +39,33 @@ func _ready() -> void:
 	if not is_in_group("Entities"):
 		add_to_group("Entities")
 
+	time_since_last_hit = 0.0
+
+
+func _physics_process(delta: float) -> void:
+	time_since_last_hit += delta
+
 
 func hit(points: float) -> void:
+	if _immunity_frames_active():
+		print("%s: Haha can't hit me, I have %.2fsec i-frames left" % [name, immunity_frames - time_since_last_hit])
+		return
+
 	health -= points
-	print("%s: %.2f -> %.2f" % [name, health + points, health])
+	time_since_last_hit = 0.0
+
+	print("%s: %.2f hp -> %.2f hp" % [name, health + points, health])
+
 	if health <= 0.0:
 		die()
 
 
 func die() -> void:
 	queue_free()
-	#passd
+	#pass
+
+
+func _immunity_frames_active() -> bool:
+	if time_since_last_hit <= immunity_frames:
+		return true
+	return false

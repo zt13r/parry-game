@@ -37,6 +37,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	_handle_states(delta)
 	_apply_gravity(delta)
 	_weapon_sprite_rotation()

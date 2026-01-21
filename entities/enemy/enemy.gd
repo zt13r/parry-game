@@ -24,6 +24,7 @@ var current_state: EnemyState = EnemyState.IDLE
 
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	_handle_states(delta)
 	_apply_gravity(delta)
 	_enemy_sprite_face()
