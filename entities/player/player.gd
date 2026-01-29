@@ -19,12 +19,10 @@ enum PlayerState {
 
 var current_state: PlayerState = PlayerState.IDLE ## Used for player processing and transition
 
-var mouse_pos: Vector2 = Vector2.ZERO ## Keeps track of global mouse position
 var weapon_dir: Vector2 = Vector2.ZERO ## Helps with attacking direction
 
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var weapon: Weapon = $RangedWeapon
 
 
 func _ready() -> void:
@@ -143,4 +141,4 @@ func _weapon_sprite_rotation() -> void:
 
 func _player_sprite_face() -> void:
 	# Sprite faces mouse position
-	sprite.flip_h = mouse_pos.x < position.x
+	sprite.flip_h = get_global_mouse_position().x < position.x

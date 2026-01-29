@@ -15,7 +15,6 @@ func _ready() -> void:
 			print("projectiles_group is null (res://weapons/ranged/ranged_weapon.gd)")
 
 
-
 func attack() -> void:
 	_shoot()
 
@@ -31,6 +30,9 @@ func _shoot() -> void:
 	projectile.damage = actor.damage
 	projectile.direction = actor.weapon_dir
 	projectile.fired_by = actor
+
+	# Copies entity color to projectile color
+	projectile.self_modulate = actor.self_modulate
 
 	projectile.global_position = actor.global_position
 

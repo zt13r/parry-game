@@ -65,6 +65,7 @@ func _process_moving() -> void:
 
 func _process_attacked() -> void:
 	time_since_attack = 0.0
+	weapon.attack()
 
 
 func _process_jumped() -> void:
