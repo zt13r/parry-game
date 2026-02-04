@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ca5ysa77v7rxt"]
+[gd_scene load_steps=15 format=3 uid="uid://ca5ysa77v7rxt"]
 
 [ext_resource type="Script" uid="uid://dybs74ygojbd5" path="res://entities/player/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://bbt4ssn8r0q1s" path="res://components/hboxes/hurtbox.tscn" id="2_abrql"]
@@ -86,6 +86,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fkugw"]
+radius = 64.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 immunity_frames = 0.35
@@ -107,3 +110,10 @@ animation = &"idle_front"
 frame_progress = 0.528932
 
 [node name="Weapon" type="Sprite2D" parent="."]
+
+[node name="ParryArea" type="Area2D" parent="."]
+
+[node name="ParryCollision" type="CollisionShape2D" parent="ParryArea"]
+shape = SubResource("CircleShape2D_fkugw")
+
+[connection signal="body_entered" from="ParryArea" to="." method="_on_parry_area_entered"]

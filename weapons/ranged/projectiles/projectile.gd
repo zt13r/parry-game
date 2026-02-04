@@ -2,7 +2,7 @@ class_name Projectile extends CharacterBody2D
 # No direct collision child, hits are handled by Hitbox component
 
 
-var speed: float = 100.0
+var speed: float = 20.0
 var damage: float = 0.0
 var direction: Vector2 = Vector2.ZERO
 
